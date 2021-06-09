@@ -11,6 +11,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 
 const initialState = {
   name: '',
+  username: '',
   email: '',
   password: '',
   roles: 'user',
@@ -27,6 +28,10 @@ class SignUpScreen extends Component {
     this.setState({name});
   };
 
+  onUsernameChange = (username) => {
+    this.setState({username});
+  };
+
   onEmailChange = (email) => {
     this.setState({email});
   };
@@ -40,8 +45,8 @@ class SignUpScreen extends Component {
   };
 
   onPressLogin() {
-    const {name, email, password, roles} = this.state;
-    const payload = {name, email, password, roles};
+    const {name, username, email, password, roles} = this.state;
+    const payload = {name, username, email, password, roles};
     console.log(payload);
 
     const onSuccess = ({data}) => {
@@ -130,15 +135,39 @@ class SignUpScreen extends Component {
                   style={STYLES.inputIcon}
                 />
                 <TextInput
-                  placeholder="Name"
+                  placeholder="Full Name"
                   style={STYLES.input}
                   value={this.state.name}
                   maxLength={50}
                   autoCapitalize="none"
                   autoCorrect={false}
                   returnKeyType="next"
-                  onSubmitEditing={() => this.email.focus()}
+                  onSubmitEditing={() => this.username.focus()}
                   onChangeText={this.onNameChange}
+                  underlineColorAndroid="transparent"
+                  placeholderTextColor="#999"
+                />
+              </View>
+              <View style={STYLES.inputContainer}>
+                <Icon
+                  name="person-outline"
+                  color={COLORS.light}
+                  size={20}
+                  style={STYLES.inputIcon}
+                />
+                <TextInput
+                  placeholder="Username"
+                  style={STYLES.input}
+                  ref={(node) => {
+                    this.username = node;
+                  }}
+                  value={this.state.username}
+                  maxLength={256}
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  returnKeyType="next"
+                  onSubmitEditing={() => this.email.focus()}
+                  onChangeText={this.onUsernameChange}
                   underlineColorAndroid="transparent"
                   placeholderTextColor="#999"
                 />
