@@ -8,6 +8,8 @@ import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import {Component} from 'react';
 import APIKit, {setClientToken} from '../../router/APIKit';
 import Spinner from 'react-native-loading-spinner-overlay';
+import HomeScreen from './HomeScreen';
+import OnBoardScreen from './OnBoardScreen';
 
 const initialState = {
   email: '',
@@ -248,7 +250,7 @@ class SignInScreen extends Component {
           </ScrollView>
         ) : (
           <View>
-            <Text>Successfully authorized!</Text>
+            <OnBoardScreen />
           </View>
         )}
       </SafeAreaView>
